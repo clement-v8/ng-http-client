@@ -1,0 +1,19 @@
+<div *ngIf="arrayFileUpload.length > 0 && progress.percentage != -1" class="progress">
+    <div class="progress-bar" role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+        aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progress.percentage+'%'}">
+        {{progress.percentage}}%</div>
+</div>
+<label for="fileUpload" class="default-upload" *ngIf="arrayFileUpload.length < 1;else localImage">
+    <img src="/assets/no-image.webp" class="default-image">
+</label>
+<ng-template #localImage>
+    <div class="image-col" *ngFor="let img of arrayFileUpload; let i = index">
+        <label for="fileUpload">
+            <img *ngIf="img.url != null" [src]="img.url">
+        </label>
+    </div>
+</ng-template>
+<label class="btn btn-default" hidden>
+    <input type="file" (change)="selectFile($event)" id="fileUpload">
+</label>
+    
